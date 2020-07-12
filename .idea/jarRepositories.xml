@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteRepositoriesConfiguration">
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Central repository" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jboss.community" />
+      <option name="name" value="JBoss Community repository" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_gmaven_stable" />
+      <option name="name" value="injected_offline_gmaven_stable" />
+      <option name="url" value="file:/$PROJECT_DIR$/../../../gmaven_stable/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_.gradle" />
+      <option name="name" value="injected_offline_.gradle" />
+      <option name="url" value="file:/$PROJECT_DIR$/../../../.gradle/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_class" />
+      <option name="name" value="injected_offline_class" />
+      <option name="url" value="file:/$PROJECT_DIR$/../../../class/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_others" />
+      <option name="name" value="injected_offline_others" />
+      <option name="url" value="file:/$PROJECT_DIR$/../../../others/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_.android" />
+      <option name="name" value="injected_offline_.android" />
+      <option name="url" value="file:/$PROJECT_DIR$/../../../.android/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="BintrayJCenter" />
+      <option name="name" value="BintrayJCenter" />
+      <option name="url" value="https://jcenter.bintray.com/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_gradle-6.1.1" />
+      <option name="name" value="injected_offline_gradle-6.1.1" />
+      <option name="url" value="file:/$PROJECT_DIR$/../../../gradle-6.1.1/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_pnglib" />
+      <option name="name" value="injected_offline_pnglib" />
+      <option name="url" value="file:/$PROJECT_DIR$/../../../pnglib/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_android-gradle-plugin-3.5.0-beta01" />
+      <option name="name" value="injected_offline_android-gradle-plugin-3.5.0-beta01" />
+      <option name="url" value="file:/$PROJECT_DIR$/../../../android-gradle-plugin-3.5.0-beta01/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_tools" />
+      <option name="name" value="injected_offline_tools" />
+      <option name="url" value="file:/$PROJECT_DIR$/../../../tools/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_androidstudio" />
+      <option name="name" value="injected_offline_androidstudio" />
+      <option name="url" value="file:/$PROJECT_DIR$/../../" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="Google" />
+      <option name="name" value="Google" />
+      <option name="url" value="https://dl.google.com/dl/android/maven2/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_《第一行代码——Android（第3版）》随书资源" />
+      <option name="name" value="injected_offline_《第一行代码——Android（第3版）》随书资源" />
+      <option name="url" value="file:/$PROJECT_DIR$/../../../《第一行代码——Android（第3版）》随书资源/" />
+    </remote-repository>
+  </component>
+</project>

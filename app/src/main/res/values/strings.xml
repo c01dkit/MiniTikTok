@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MiniTikTok</string>
+    <string name="home_tab">首页</string>
+    <string name="place_tab">西湖</string>
+    <string name="message_tab">消息</string>
+    <string name="profile_tab">我</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="message_fragment">Hello message fragment</string>
+    <string name="place_fragment">Hello place fragment</string>
+    <string name="home_fragment">Hello home fragment</string>
+    <string name="profile_fragment">Hello profile fragment</string>
+    <string name="upload_fragment">Hello upload fragment</string>
+</resources>

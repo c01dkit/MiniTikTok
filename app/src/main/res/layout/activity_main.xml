@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/main_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+
+    <RadioGroup
+        android:id="@+id/radio_group_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <RadioButton
+            android:id="@+id/radio_button_home"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/home_tab"
+            android:checked="true"
+            style="@style/MyBottomTabs"/>
+
+        <RadioButton
+            android:id="@+id/radio_button_place"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/place_tab"
+            style="@style/MyBottomTabs" />
+
+        <RadioButton
+            android:id="@+id/radio_button_upload"
+            style="@style/MyBottomTabs"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_launcher_foreground" />
+
+        <RadioButton
+            android:id="@+id/radio_button_message"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/message_tab"
+            style="@style/MyBottomTabs"/>
+
+        <RadioButton
+            android:id="@+id/radio_button_profile"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/profile_tab"
+            style="@style/MyBottomTabs"/>
+
+    </RadioGroup>
+</LinearLayout>
