@@ -20,7 +20,7 @@ public class SplashActivity extends BaseActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getBaseContext(),MainActivity.class);
+                Intent intent = new Intent(getBaseContext(),LoginActivity.class);
                 startActivity(intent);
                 //设定淡入淡出
                 overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
