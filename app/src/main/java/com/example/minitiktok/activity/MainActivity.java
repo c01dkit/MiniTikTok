@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
@@ -27,6 +28,9 @@ public class MainActivity extends BaseActivity {
     private RadioButton mRadioButtonHome;
     private List<Fragment> mFragments = new ArrayList<>();
     private static final String TAG = "MainActivity";
+    //private Intent get_intent = getIntent();
+    //private String userName = get_intent.getStringExtra("user_name");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +45,7 @@ public class MainActivity extends BaseActivity {
         mFragments.add(PlaceFragment.newInstance("b","1"));
         mFragments.add(UploadFragment.newInstance("c","2"));
         mFragments.add(MessageFragment.newInstance("d","3"));
-        mFragments.add(ProfileFragment.newInstance("e","4"));
+        mFragments.add(ProfileFragment.newInstance("userName","4")); //如果直接传入字符串是可以运行的
     }
     //底部状态按钮与碎片绑定
     private void initBottom(){

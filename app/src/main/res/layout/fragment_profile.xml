@@ -3,12 +3,98 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:elevation="0dp"
+        android:background="#00000000">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            app:layout_scrollFlags="scroll|enterAlways"
+            android:id="@+id/cl_top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_blue_bright">
+            <TextView
+                android:id="@+id/tv_sig"
+                android:text="@string/sig"
+                android:textColor="@android:color/background_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/tv_sig_content"
+                app:layout_constraintStart_toStartOf="@id/tv_sig_content" />
+            <TextView
+                android:id="@+id/tv_sig_content"
+                android:text="@string/sig_content"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/profile_fragment" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/fl_placeholder"
+                android:layout_width="match_parent"
+                android:layout_marginTop="30dp"
+                android:layout_height="0dp"
+                app:layout_constraintVertical_weight="4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rl_name" />
+
+            <RelativeLayout
+                android:id="@+id/rl_name"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@android:color/holo_blue_bright"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="16dp"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="24sp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/b_exit"
+                    android:layout_toEndOf="@id/tv_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorAccent"
+                    android:textColor="@android:color/background_light"
+                    android:text="@string/exit" />
+
+            </RelativeLayout>
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/civ_head"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/head"
+                app:riv_oval="true"
+                app:layout_constraintHorizontal_bias="0.9"
+                app:layout_constraintBottom_toTopOf="@id/fl_placeholder"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 
 </FrameLayout>
