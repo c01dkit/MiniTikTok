@@ -19,4 +19,10 @@
     <string name="home_fragment">Hello home fragment</string>
     <string name="profile_fragment">Hello profile fragment</string>
     <string name="upload_fragment">Hello upload fragment</string>
+
+    <!-- activity_video_recording -->
+    <string name="record_start">开始录制</string>
+    <string name="record_stop">结束录制</string>
+    <string name="button">切换摄像头</string>
+    <string name="zoom">对焦</string>
 </resources>

@@ -28,8 +28,8 @@ public class MainActivity extends BaseActivity {
     private RadioButton mRadioButtonHome;
     private List<Fragment> mFragments = new ArrayList<>();
     private static final String TAG = "MainActivity";
-    //private Intent get_intent = getIntent();
-    //private String userName = get_intent.getStringExtra("user_name");
+    private Intent get_intent;
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +41,19 @@ public class MainActivity extends BaseActivity {
     }
     //加载实例到集合中 TODO: 实例化方法应该进行修改
     private void loadFragments(){
+        get_intent = getIntent();
+        userName = get_intent.getStringExtra("user_name");
         mFragments.add(HomeFragment.newInstance("a","0"));
         mFragments.add(PlaceFragment.newInstance("b","1"));
         mFragments.add(UploadFragment.newInstance("c","2"));
         mFragments.add(MessageFragment.newInstance("d","3"));
-        mFragments.add(ProfileFragment.newInstance("userName","4")); //如果直接传入字符串是可以运行的
+        mFragments.add(ProfileFragment.newInstance(userName,"4")); //如果直接传入字符串是可以运行的
     }
     //底部状态按钮与碎片绑定
     private void initBottom(){
         mRadioGroup = findViewById(R.id.radio_group_buttons);
         mRadioButtonHome = findViewById(R.id.radio_button_home);
+        ((RadioButton)findViewById(R.id.radio_button_home)).setTextColor(getResources().getColor(R.color.light_background));
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             Fragment fragment = null;
             @Override
@@ -65,8 +68,9 @@ public class MainActivity extends BaseActivity {
                         break;
                     }
                     case R.id.radio_button_upload:{
-                        fragment = mFragments.get(2);
-                        break;
+                        Intent intent = new Intent(MainActivity.this,VideoRecordingActivity.class);
+                        startActivity(intent);
+                        return;
                     }
                     case R.id.radio_button_message:{
                         fragment = mFragments.get(3);
@@ -82,10 +86,18 @@ public class MainActivity extends BaseActivity {
                             .replace(R.id.main_container,fragment)
                             .commit();
                 }
-                ((RadioButton)findViewById(radioID)).setTextColor(getResources().getColor(R.color.light_background,null));
+                updateRadioColor(radioID);
             }
         });
         mRadioButtonHome.setChecked(true);
+    }
+
+    private void updateRadioColor(int radioID) {
+        ((RadioButton)findViewById(R.id.radio_button_home)).setTextColor(getResources().getColor(R.color.dark_background));
+        ((RadioButton)findViewById(R.id.radio_button_message)).setTextColor(getResources().getColor(R.color.dark_background));
+        ((RadioButton)findViewById(R.id.radio_button_place)).setTextColor(getResources().getColor(R.color.dark_background));
+        ((RadioButton)findViewById(R.id.radio_button_profile)).setTextColor(getResources().getColor(R.color.dark_background));
+        ((RadioButton)findViewById(radioID)).setTextColor(getResources().getColor(R.color.light_background));
     }
 
 }

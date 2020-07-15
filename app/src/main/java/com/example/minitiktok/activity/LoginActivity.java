@@ -14,7 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import com.example.minitiktok.R;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class LoginActivity extends Activity {
         getWindow().setAttributes(layoutParams);*/
 
         setContentView(R.layout.activity_login);
-
+        permissionRequest(1);
         findViewById(R.id.ib_close).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,8 +50,8 @@ public class LoginActivity extends Activity {
                 }
                 Intent i = new Intent(getBaseContext(),MainActivity.class);
                 i.putExtra("user_name", userName);
-                //i.putExtra("user_id", userID);
-                setResult(RESULT_OK, i);
+                i.putExtra("user_id", userID);
+//                setResult(RESULT_OK, i);
                 startActivity(i);
                 finish();
             }
