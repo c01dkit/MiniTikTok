@@ -47,7 +47,7 @@ public class MainActivity extends BaseActivity {
         mFragments.add(PlaceFragment.newInstance("b","1"));
         mFragments.add(UploadFragment.newInstance("c","2"));
         mFragments.add(MessageFragment.newInstance("d","3"));
-        mFragments.add(ProfileFragment.newInstance(userName,"4")); //如果直接传入字符串是可以运行的
+        mFragments.add(ProfileFragment.newInstance(userName,"4"));
     }
     //底部状态按钮与碎片绑定
     private void initBottom(){
