@@ -1,14 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context=".fragment.MessageFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <FrameLayout
+        android:id="@+id/frame_message"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/message_fragment" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="180dp"
+            android:text="@string/message_tab"
+            android:textSize="20dp"
+            android:textColor="@color/light_background" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/fans"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="50dp"
+            android:padding="10dp"
+            android:src="@mipmap/fans"
+            app:riv_oval="true"/>
+
+        <TextView
+            android:id="@+id/tv_fans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="72dp"
+            android:layout_marginLeft="80dp"
+            android:text="@string/fans"
+            android:textColor="@color/light_background"
+            android:textSize="18sp"/>
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/contact"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="125dp"
+            android:padding="10dp"
+            android:src="@mipmap/contact"
+            app:riv_oval="true"/>
+
+        <TextView
+            android:id="@+id/tv_likes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contact"
+            android:textColor="@color/light_background"
+            android:textSize="18sp"
+            android:layout_marginTop="150dp"
+            android:layout_marginLeft="80dp" />
+
+    </FrameLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/message"
+        android:layout_marginTop="220dp"/>
 
 </FrameLayout>

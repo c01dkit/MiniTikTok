@@ -1,14 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context=".fragment.PlaceFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <FrameLayout
+        android:id="@+id/frame_xihu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/place_fragment" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginLeft="180dp"
+            android:textSize="20dp"
+            android:text="@string/place_tab"
+            android:textColor="@color/light_background"/>
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="240dp"
+            android:layout_height="280dp"
+            android:src="@drawable/wangfeifei"/>
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="200dp"
+            android:layout_height="280dp"
+            android:src="@drawable/mengjia"
+            android:layout_toEndOf="@+id/imageView1"/>
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="200dp"
+            android:layout_height="300dp"
+            android:src="@drawable/shenmengchen"
+            android:layout_marginTop="310dp"/>
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="200dp"
+            android:layout_height="280dp"
+            android:src="@drawable/zhanghanyun"
+            android:layout_marginTop="290dp"
+            android:layout_toEndOf="@+id/imageView3"/>
+
+    </RelativeLayout>
 
 </FrameLayout>
