@@ -65,7 +65,7 @@ public class MainActivity extends BaseActivity {
         Intent get_intent = getIntent();
         userName = get_intent.getStringExtra("user_name");
         userID = get_intent.getStringExtra("user_id");
-        mFragments.add(HomeFragment.newInstance("a","0"));
+        mFragments.add(HomeFragment.newInstance(userName,"0"));
         mFragments.add(PlaceFragment.newInstance("b","1"));
         mFragments.add(UploadFragment.newInstance("c","2"));
         mFragments.add(MessageFragment.newInstance(userName,userID));

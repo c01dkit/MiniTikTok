@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -55,7 +56,7 @@ public class HomeFragment extends BaseFragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private String userName;
     private String mParam2;
 
     /**
@@ -68,12 +69,16 @@ public class HomeFragment extends BaseFragment {
      */
     // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
+        HomeFragment fragment = new HomeFragment(param1);
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public HomeFragment(String userName) {
+        this.userName = userName;
     }
 
     private RecyclerView mrvVideo;
@@ -90,15 +95,11 @@ public class HomeFragment extends BaseFragment {
     private LinearLayoutManager layoutManager;
     private List<Boolean> likeList = new ArrayList<>();
 
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            userName = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -117,7 +118,6 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onPause() {
         super.onPause();
-        //JZVideoPlayerStandard.goOnPlayOnPause();
         JZVideoPlayer.releaseAllVideos();
     }
 
@@ -203,9 +203,11 @@ public class HomeFragment extends BaseFragment {
     public class VideoViewHolder extends RecyclerView.ViewHolder {
 
         private LoopVideo mp_video;
+        private TextView userText; //TODO 试图传入用户名
         public VideoViewHolder(View rootView) {
             super(rootView);
             this.mp_video = rootView.findViewById(R.id.click_pop_video);
+            this.userText = rootView.findViewById(R.id.userName);
         }
     }
 
@@ -267,6 +269,8 @@ public class HomeFragment extends BaseFragment {
                 holder.mp_video.startVideo();
             }
 
+            holder.userText.setText(userName);
+
             // 设置缩略图
             GlideBuilder builder = new GlideBuilder(getActivity());
             int diskSizeInBytes = 1024 * 1024 * 100;
@@ -283,6 +287,8 @@ public class HomeFragment extends BaseFragment {
         @Override
         public VideoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = View.inflate(parent.getContext(), R.layout.activity_video, null);
+            //TextView userText = view.findViewById(R.id.userName);
+            //userText.setText(userName);
 
             LoopVideo videoPlayer = view.findViewById(R.id.click_pop_video);
             ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) videoPlayer.getLayoutParams();

@@ -14,10 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.minitiktok.R;
-import com.example.minitiktok.activity.MainActivity;
 import com.example.minitiktok.recycler.MyAdapter;
-import com.example.minitiktok.recycler.TestData;
-import com.example.minitiktok.recycler.TestDataSet;
+import com.example.minitiktok.recycler.MessageData;
+import com.example.minitiktok.recycler.MessageDataSet;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,7 +64,7 @@ public class MessageFragment extends BaseFragment implements MyAdapter.IOnItemCl
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new MyAdapter(TestDataSet.getData());
+        mAdapter = new MyAdapter(MessageDataSet.getData());
         mAdapter.setOnItemClickListener(this);
         recyclerView.setAdapter(mAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
@@ -82,12 +81,13 @@ public class MessageFragment extends BaseFragment implements MyAdapter.IOnItemCl
     }
 
     @Override
-    public void onItemCLick(int position, TestData data) {
+    public void onItemCLick(int position, MessageData data) {
 
     }
 
     @Override
-    public void onItemLongCLick(int position, TestData data) {
+    public void onItemLongCLick(int position, MessageData data) {
 
     }
+
 }

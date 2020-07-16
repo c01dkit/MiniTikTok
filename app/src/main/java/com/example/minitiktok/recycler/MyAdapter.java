@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    private List<TestData> mDataset = new ArrayList<>();
+    private List<MessageData> mDataset = new ArrayList<>();
     private IOnItemClickListener mItemClickListener;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -34,7 +34,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             msg_ImageView = v.findViewById(R.id.msgImage);
         }
 
-        public void onBind(int position, TestData data) {
+        public void onBind(int position, MessageData data) {
             msg_title.setText(data.msgName);
             msg_time.setText(data.msgTime);
             msg_content.setText(data.msgContent);
@@ -56,7 +56,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
 
 
-    public MyAdapter(List<TestData> myDataset) {
+    public MyAdapter(List<MessageData> myDataset) {
         mDataset.addAll(myDataset);
     }
 
@@ -112,9 +112,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public interface IOnItemClickListener {
 
-        void onItemCLick(int position, TestData data);
+        void onItemCLick(int position, MessageData data);
 
-        void onItemLongCLick(int position, TestData data);
+        void onItemLongCLick(int position, MessageData data);
     }
 }
 
