@@ -4,8 +4,6 @@
     <string name="place_tab">西湖</string>
     <string name="message_tab">消息</string>
     <string name="profile_tab">我</string>
-    <string name="sig">个性签名</string>
-    <string name="sig_content">就挺秃然的……</string>
     <string name="login_pref_name">login_preferences</string>
     <string name="login">登录</string>
     <string name="username">用户名</string>
@@ -14,11 +12,17 @@
     <string name="follow_text">已关注</string>
     <string name="unfollow_text">关注</string>
     <string name="recommend">推荐</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="message_fragment">Hello message fragment</string>
+    <!-- "消息" -->
+    <string name="fans">粉丝</string>
+    <string name="contact">互动消息</string>
+    <string name="DouYin">抖音小助手</string>
+    <!-- "同城"  -->
     <string name="place_fragment">Hello place fragment</string>
-    <string name="home_fragment">Hello home fragment</string>
-    <string name="profile_fragment">Hello profile fragment</string>
+    <!-- "首页" -->
+    <!-- "我" -->
+    <string name="sig">个性签名</string>
+    <string name="sig_content">就挺秃然的……</string>
+    <!-- "上传" -->
     <string name="upload_fragment">Hello upload fragment</string>
 
     <!-- activity_video_recording -->
