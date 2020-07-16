@@ -16,11 +16,12 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         hideExtra();
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getBaseContext(),LoginActivity.class);
+                Intent intent = new Intent(getBaseContext(),MainActivity.class);
                 startActivity(intent);
                 //设定淡入淡出
                 overridePendingTransition(R.anim.fade_in,R.anim.fade_out);

@@ -146,9 +146,10 @@ public class VideoRecordingActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (ActivityCompat.checkSelfPermission(VideoRecordingActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(VideoRecordingActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(VideoRecordingActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(VideoRecordingActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(VideoRecordingActivity.this, "请授予全部权限后再启动视频录制功能！", Toast.LENGTH_SHORT).show();
+            finish();
+        } else if (ActivityCompat.checkSelfPermission(VideoRecordingActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(VideoRecordingActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(VideoRecordingActivity.this, "请授予全部权限后再启动视频录制功能！", Toast.LENGTH_SHORT).show();
             finish();
         }

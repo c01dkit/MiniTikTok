@@ -48,11 +48,13 @@ public class MainActivity extends BaseActivity {
     private List<Fragment> mFragments = new ArrayList<>();
     private static final String TAG = "MainActivity";
     private Intent get_intent;
-    private String userName;
-    private String userID;
-    private static final int RECORD = 1280;
+    private String userName = "visitor";
+    private String userID = "001";
     private static final int PICK_IMAGE = 1;
+    private static final int LOGIN = 2;
+    private static final int RECORD = 3;
     private long lastTime;
+    private boolean login = false;
     private final int EXIT_TIME = 2000;
     private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(IMiniDouyinService.BASE_URL)
@@ -64,6 +66,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         hideExtra();
+        permissionRequest(1);
         loadFragments();
         initBottom();
     }
@@ -75,7 +78,7 @@ public class MainActivity extends BaseActivity {
         mFragments.add(HomeFragment.newInstance("a","0"));
         mFragments.add(PlaceFragment.newInstance("b","1"));
         mFragments.add(UploadFragment.newInstance("c","2"));
-        mFragments.add(MessageFragment.newInstance("d","3"));
+        mFragments.add(MessageFragment.newInstance(userName,userID));
         mFragments.add(ProfileFragment.newInstance(userName,userID));
     }
     //底部状态按钮与碎片绑定
@@ -97,16 +100,31 @@ public class MainActivity extends BaseActivity {
                         break;
                     }
                     case R.id.radio_button_upload:{
+                        ((RadioButton)findViewById(R.id.radio_button_upload)).setChecked(false);
                         Intent intent = new Intent(MainActivity.this,VideoRecordingActivity.class);
                         startActivityForResult(intent,RECORD);
                         return;
                     }
                     case R.id.radio_button_message:{
-                        fragment = mFragments.get(3);
+                        if (login) {
+                            fragment = mFragments.get(3);
+                        } else {
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivityForResult(intent,LOGIN);
+                            ((RadioButton)findViewById(R.id.radio_button_message)).setChecked(false);
+                            return;
+                        }
                         break;
                     }
                     case R.id.radio_button_profile:{
-                        fragment = mFragments.get(4);
+                        if (login) {
+                            fragment = mFragments.get(4);
+                        } else {
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivityForResult(intent,LOGIN);
+                            ((RadioButton)findViewById(R.id.radio_button_profile)).setChecked(false);
+                            return;
+                        }
                         break;
                     }
                 }
@@ -119,6 +137,9 @@ public class MainActivity extends BaseActivity {
             }
         });
         mRadioButtonHome.setChecked(true);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_container,mFragments.get(0))
+                .commit();
     }
 
     private void updateRadioColor(int radioID) {
@@ -132,8 +153,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult: requestCode  = "+requestCode+" resultCode = "+resultCode);
         if(null == data || RESULT_OK != resultCode) return;
-
         switch (requestCode){
             case RECORD:{
                 mSelectedVideoPath = data.getStringExtra(getString(R.string.video_path));
@@ -155,6 +176,19 @@ public class MainActivity extends BaseActivity {
                             + ", mSelectedImage = "
                             + mSelectedImagePath);
                 }
+                break;
+            }
+            case LOGIN:{
+                userID = data.getStringExtra(getString(R.string.userId));
+                userName = data.getStringExtra(getString(R.string.username));
+//                重新初始化后两个fragment
+                mFragments.remove(mFragments.size()-1);
+                mFragments.remove(mFragments.size()-1);
+                mFragments.add(MessageFragment.newInstance(userName,userID));
+                mFragments.add(ProfileFragment.newInstance(userName,userID));
+                Log.d(TAG, "onActivityResult: Set login = true");
+                login = true;
+                break;
             }
         }
     }
@@ -179,26 +213,24 @@ public class MainActivity extends BaseActivity {
     }
 
     private void postVideo() {
-        Log.d(TAG, "postVideo: Process check1");
         MultipartBody.Part videoPart = getMultipartFromString("video", mSelectedVideoPath);
 
-        Log.d(TAG, "postVideo: Process check2");
         MultipartBody.Part coverImagePart = getMultipartFromString("cover_image", mSelectedImagePath);
 
-        //TODO 这里的ID和Username换成用户登陆使用的内容
-        Log.d(TAG, "postVideo: Process check3");
+        Toast.makeText(MainActivity.this,"视频正在上传中，请耐心等待……",Toast.LENGTH_SHORT).show();
         miniDouyinService.postVideo(userID, userName, coverImagePart, videoPart).enqueue(
                 new Callback<PostVideoResponse>() {
                     @Override
                     public void onResponse(Call<PostVideoResponse> call, Response<PostVideoResponse> response) {
                         if (response.body() != null) {
-                            Toast.makeText(MainActivity.this, "视频已上传", Toast.LENGTH_SHORT)
-                                    .show();
+                            Toast.makeText(MainActivity.this, "视频已上传", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "onResponse: Upload video");
                         }
                     }
                     @Override
                     public void onFailure(Call<PostVideoResponse> call, Throwable throwable) {
                         Toast.makeText(MainActivity.this,"上传失败", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "onFailure: Upload Failed");
                     }
                 });
     }

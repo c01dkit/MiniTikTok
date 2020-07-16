@@ -21,10 +21,12 @@
                 android:id="@+id/tv_sig"
                 android:text="@string/sig"
                 android:textColor="@android:color/background_light"
+                android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/tv_sig_content"
                 app:layout_constraintStart_toStartOf="@id/tv_sig_content" />
+
             <TextView
                 android:id="@+id/tv_sig_content"
                 android:text="@string/sig_content"
@@ -33,8 +35,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -65,21 +67,12 @@
                     android:id="@+id/tv_username"
                     android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="10dp"
                     android:textColor="@android:color/background_light"
                     android:textSize="24sp"
                     android:layout_marginEnd="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/b_exit"
-                    android:layout_toEndOf="@id/tv_username"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorAccent"
-                    android:textColor="@android:color/background_light"
-                    android:text="@string/exit" />
 
             </RelativeLayout>
 

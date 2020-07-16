@@ -19,7 +19,8 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//        hideExtra();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
             Transition slide = TransitionInflater.from(this).inflateTransition(R.transition.slide);
             getWindow().setEnterTransition(slide);
@@ -27,14 +28,13 @@ public class LoginActivity extends BaseActivity {
 
         WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
         layoutParams.alpha = 0.98f;
-        getWindow().setAttributes(layoutParams);*/
+        getWindow().setAttributes(layoutParams);
 
         setContentView(R.layout.activity_login);
-        permissionRequest(1);
+//        permissionRequest(1);
         findViewById(R.id.ib_close).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setResult(Activity.RESULT_CANCELED);
                 finish();
             }
         });
@@ -44,15 +44,17 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View view) {
                 String userName = ((EditText)findViewById(R.id.et_name)).getText().toString();
                 String userID = ((EditText)findViewById(R.id.et_id)).getText().toString();
+                Intent i = getIntent();
+                i.putExtra(getString(R.string.username), userName);
+                i.putExtra(getString(R.string.userId), userID);
                 if (userID.isEmpty() || userName.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "内容不能为空！", Toast.LENGTH_SHORT).show();
-                    return;
+                    Toast.makeText(LoginActivity.this, "登录失败：用户名或学号不能为空", Toast.LENGTH_SHORT).show();
+                    setResult(RESULT_CANCELED,i);
+                } else {
+                    Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                    setResult(RESULT_OK,i);
                 }
-                Intent i = new Intent(getBaseContext(),MainActivity.class);
-                i.putExtra("user_name", userName);
-                i.putExtra("user_id", userID);
-//                setResult(RESULT_OK, i);
-                startActivity(i);
+                setResult(RESULT_OK,i);
                 finish();
             }
         });

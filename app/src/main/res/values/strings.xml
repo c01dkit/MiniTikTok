@@ -13,6 +13,7 @@
     <string name="exit">退出账号</string>
     <string name="follow_text">已关注</string>
     <string name="unfollow_text">关注</string>
+    <string name="recommend">推荐</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="message_fragment">Hello message fragment</string>
     <string name="place_fragment">Hello place fragment</string>

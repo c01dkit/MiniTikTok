@@ -61,17 +61,6 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
-        v.findViewById(R.id.b_exit).setOnClickListener(view -> new AlertDialog.Builder(getActivity())
-                .setTitle("警告")
-                .setMessage("确认要退出吗？")
-                .setNegativeButton("取消", (dialogInterface, i) -> {
-                   //Do nothing
-                })
-                .setPositiveButton("确认", (dialogInterface, i) -> {
-                   //(LoginActivity) getActivity())
-                })
-                .create()
-                .show());
         ((TextView)v.findViewById(R.id.tv_username)).setText(userName);
         /*getChildFragmentManager()
                 .beginTransaction()
