@@ -6,88 +6,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.ProfileFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        app:elevation="0dp"
-        android:background="#00000000">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            app:layout_scrollFlags="scroll|enterAlways"
-            android:id="@+id/cl_top"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/holo_blue_bright">
-            <TextView
-                android:id="@+id/tv_sig"
-                android:text="@string/sig"
-                android:textColor="@android:color/background_light"
-                android:textSize="20sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/tv_sig_content"
-                app:layout_constraintStart_toStartOf="@id/tv_sig_content" />
-
-            <TextView
-                android:id="@+id/tv_sig_content"
-                android:text="@string/sig_content"
-                android:textColor="@android:color/background_light"
-                android:textSize="20sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@+id/fl_placeholder"
+
+            <ImageView
+                android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:layout_marginTop="30dp"
-                android:layout_height="0dp"
-                app:layout_constraintVertical_weight="4"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rl_name" />
+                android:layout_height="200dp"
+                android:src="@drawable/jz_bottom_seek_progress" />
 
-            <RelativeLayout
-                android:id="@+id/rl_name"
-                app:layout_constraintTop_toTopOf="parent"
-                android:background="@android:color/holo_blue_bright"
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
-                <TextView
-                    android:id="@+id/tv_username"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="10dp"
-                    android:textColor="@android:color/background_light"
-                    android:textSize="24sp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="32sp"
+                android:gravity="center"
+                android:textColor="@color/light_background"
+                android:text="@string/tv_userName" />
 
-            </RelativeLayout>
+            <TextView
+                android:id="@+id/user_id"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:textColor="@color/dark_background"
+                android:text="@string/tv_user_id" />
+        </LinearLayout>
 
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/civ_head"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/head"
-                app:riv_oval="true"
-                app:layout_constraintHorizontal_bias="0.9"
-                app:layout_constraintBottom_toTopOf="@id/fl_placeholder"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/my_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:tabSelectedTextColor="@color/tab_final_color"
+            app:tabTextColor="@color/tab_origin_color"
+            app:tabIndicatorColor="@color/tab_selected_color"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </RelativeLayout>
-
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/my_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:textColor="@color/dark_background"
+            android:layout_weight="4"/>
+    </LinearLayout>
 </FrameLayout>
