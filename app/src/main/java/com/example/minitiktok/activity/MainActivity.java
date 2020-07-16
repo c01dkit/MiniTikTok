@@ -52,6 +52,8 @@ public class MainActivity extends BaseActivity {
     private String userID;
     private static final int RECORD = 1280;
     private static final int PICK_IMAGE = 1;
+    private long lastTime;
+    private final int EXIT_TIME = 2000;
     private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(IMiniDouyinService.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -154,6 +156,25 @@ public class MainActivity extends BaseActivity {
                             + mSelectedImagePath);
                 }
             }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        //双击返回退出App
+        if (System.currentTimeMillis() - lastTime > EXIT_TIME) {
+            if (mRadioGroup.getCheckedRadioButtonId() != R.id.radio_button_home) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.main_container,mFragments.get(0))
+                        .commit();
+                mRadioGroup.check(R.id.radio_button_home);
+                updateRadioColor(R.id.radio_button_home);
+            }else{
+                Toast.makeText(getApplicationContext(), "再按一次退出", Toast.LENGTH_SHORT).show();
+                lastTime = System.currentTimeMillis();
+            }
+        } else {
+            super.onBackPressed();
         }
     }
 

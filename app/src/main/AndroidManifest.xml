@@ -20,19 +20,28 @@
         android:roundIcon="@drawable/douyin1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.TakePhotoActivity"></activity>
-        <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.SplashActivity">
+        <activity android:name=".activity.TakePhotoActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.MainActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.VideoRecordingActivity"
-            android:parentActivityName=".activity.MainActivity" />
+            android:parentActivityName=".activity.MainActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>
