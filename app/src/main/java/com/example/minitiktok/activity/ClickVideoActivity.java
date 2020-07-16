@@ -47,7 +47,7 @@ public class ClickVideoActivity extends BaseActivity {
         LoopVideo mVideoPlayer = findViewById(R.id.click_pop_video);
         String imageUrl = getIntent().getStringExtra("image_url");
         String videoUrl = getIntent().getStringExtra("video_url");
-
+        hideExtra();
         mVideoPlayer.setUp(videoUrl,JZVideoPlayerStandard.SCREEN_WINDOW_FULLSCREEN | CURRENT_STATE_NORMAL );
         mVideoPlayer.startVideo();
 
@@ -82,6 +82,7 @@ public class ClickVideoActivity extends BaseActivity {
                 animation.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
+                        hideExtra();
                     }
 
                     @Override
@@ -90,10 +91,12 @@ public class ClickVideoActivity extends BaseActivity {
                         heart.setVisibility(View.VISIBLE);
                         Animation anim = AnimationUtils.loadAnimation(ClickVideoActivity.this, R.anim.like_anim);
                         heart.startAnimation(anim);
+                        hideExtra();
                     }
 
                     @Override
                     public void onAnimationRepeat(Animation animation) {
+                        hideExtra();
                     }
                 });
                 button.startAnimation(animation);
@@ -106,12 +109,14 @@ public class ClickVideoActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         //home back
+        hideExtra();
         JZVideoPlayerStandard.goOnPlayOnResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        hideExtra();
         JZVideoPlayerStandard.goOnPlayOnPause();
     }
 
