@@ -28,6 +28,7 @@ public class BaseActivity extends AppCompatActivity {
 //        }
     }
 
+
     public void permissionRequest(int PERMISSION_REQUEST_CAMERA_PATH_CODE){
         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED

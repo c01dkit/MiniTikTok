@@ -9,4 +9,5 @@ public class Video {
     @SerializedName("video_url") public String videoUrl;
     @SerializedName("image_w") public int imageWidth;
     @SerializedName("image_h") public int imageHeight;
+    @SerializedName("createdAt") private String time;
 }

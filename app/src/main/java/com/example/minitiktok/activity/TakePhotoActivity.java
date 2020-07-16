@@ -1,11 +1,11 @@
 package com.example.minitiktok.activity;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.hardware.Camera;
-import android.media.CamcorderProfile;
-import android.media.MediaRecorder;
+import android.media.ExifInterface;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
@@ -21,46 +21,43 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
-import androidx.core.app.ActivityCompat;
 
 import com.example.minitiktok.R;
 
-
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO;
-
-public class VideoRecordingActivity extends BaseActivity {
+public class TakePhotoActivity extends BaseActivity {
 
     private SurfaceView mSurfaceView;
     private Camera mCamera;
-    private Button btnRecord, btnChange, btnZoom;
-    private MediaRecorder mMediaRecorder;
-    private boolean isRecording = false;
+    private File mPictureFile;
+    private Button btnPhoto, btnChange, btnZoom;
     private int CAMERA_TYPE = Camera.CameraInfo.CAMERA_FACING_BACK;
     private int rotationDegree = 0;
+    public static final int MEDIA_TYPE_IMAGE = 1;
     private static final int DEGREE_90 = 90;
     private static final int DEGREE_180 = 180;
     private static final int DEGREE_270 = 270;
     private static final int DEGREE_360 = 360;
-    private static String mVideoPath = "";
-    private static final String TAG = "VideoRecordingActivity";
+    private static String mPhotoPath = "";
+    private static final String TAG = "TakePhotoActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_video_recording);
+        setContentView(R.layout.activity_take_photo);
 
-        mSurfaceView = findViewById(R.id.surfaceView);
+        mSurfaceView = findViewById(R.id.surfaceView2);
         SurfaceHolder surfaceHolder = mSurfaceView.getHolder();
         surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-        btnRecord = findViewById(R.id.btnRecord);
-        btnRecord.setEnabled(true);
-        btnChange = findViewById(R.id.btnCameraChange);
-        btnZoom = findViewById(R.id.btnZoom);
+        btnPhoto = findViewById(R.id.button);
+        btnChange = findViewById(R.id.button2);
+        btnZoom = findViewById(R.id.button3);
         surfaceHolder.addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(@NonNull SurfaceHolder holder) {
@@ -84,34 +81,12 @@ public class VideoRecordingActivity extends BaseActivity {
     }
 
     private void bind() {
-        btnRecord.setOnClickListener(new View.OnClickListener() {
+        btnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if (isRecording) {
-                    releaseMediaRecorder();
-//                    Toast.makeText(VideoRecordingActivity.this,"视频已保存: "+mVideoPath,Toast.LENGTH_LONG).show();
-                    btnRecord.setText(R.string.record_saving);
-                    btnRecord.setEnabled(false);
-                    isRecording = false;
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent intent = new Intent(VideoRecordingActivity.this, MainActivity.class);
-                            intent.putExtra(getString(R.string.video_path),mVideoPath);
-                            if (mVideoPath.isEmpty()){
-                                setResult(RESULT_CANCELED, intent);
-                            } else {
-                                setResult(RESULT_OK, intent);
-                            }
-                            finish();
-                        }
-                    },1500);
-                } else {
-                    prepareVideoRecorder();
-                    btnRecord.setText(R.string.record_stop);
-                    isRecording = true;
-                }
+            public void onClick(View v) {
+                btnPhoto.setText(R.string.record_saving);
+                btnPhoto.setEnabled(false);
+                mCamera.takePicture(null,null,mPicture);
             }
         });
 
@@ -142,18 +117,6 @@ public class VideoRecordingActivity extends BaseActivity {
             }
         });
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (ActivityCompat.checkSelfPermission(VideoRecordingActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(VideoRecordingActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(VideoRecordingActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(VideoRecordingActivity.this, "请授予全部权限后再启动视频录制功能！", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-    }
-
 
     public Camera getCamera(int position) {
         CAMERA_TYPE = position;
@@ -201,7 +164,7 @@ public class VideoRecordingActivity extends BaseActivity {
 
 
     private void releaseCameraAndPreview() {
-        mCamera.stopPreview();
+//        mCamera.stopPreview();
         mCamera.release();
         mCamera = null;
     }
@@ -217,43 +180,43 @@ public class VideoRecordingActivity extends BaseActivity {
         }
     }
 
-
-
-
-    private void prepareVideoRecorder() {
-        mMediaRecorder = new MediaRecorder();
-        mCamera.unlock();
-        mMediaRecorder.setCamera(mCamera);
-
-        mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
-        mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-
-        mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
-        File mVideoFile = getOutputMediaFile(MEDIA_TYPE_VIDEO);
-        assert mVideoFile != null;
-        mMediaRecorder.setOutputFile(mVideoFile.toString());
-
-        mMediaRecorder.setPreviewDisplay(mSurfaceView.getHolder().getSurface());
-        mMediaRecorder.setOrientationHint(rotationDegree);
-
-        try {
-            mMediaRecorder.prepare();
-            mMediaRecorder.start();
-        } catch (Exception e) {
-            releaseMediaRecorder();
+    private Camera.PictureCallback mPicture = (data, camera) -> {
+        mPictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
+        if (mPictureFile == null) {
             return;
         }
-        MediaScannerConnection.scanFile(this, new String[]{mVideoFile.toString()}, null, null);
-    }
+        try {
+            //图片旋转
+            Matrix matrix = new Matrix();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(data,0,data.length);
+            matrix.postRotate(getRotateDegree(mPhotoPath)+90);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            FileOutputStream fos = new FileOutputStream(mPictureFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (IOException e) {
+            Log.d("mPicture", "Error accessing file: " + e.getMessage());
+        }
+        MediaScannerConnection.scanFile(this, new String[] { mPictureFile.toString()},null,null);
+        mCamera.startPreview();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(TakePhotoActivity.this, MainActivity.class);
+                intent.putExtra(getString(R.string.photo_path),mPhotoPath);
+                if (mPhotoPath.isEmpty()){
+                    setResult(RESULT_CANCELED, intent);
+                } else {
 
-
-    private void releaseMediaRecorder() {
-        mMediaRecorder.stop();
-        mMediaRecorder.reset();
-        mMediaRecorder.release();
-        mMediaRecorder = null;
-        mCamera.lock();
-    }
+                    releaseCameraAndPreview();
+                    setResult(RESULT_OK, intent);
+                }
+                finish();
+            }
+        },1000);
+    };
 
     private Camera.Size getOptimalPreviewSize(List<Camera.Size> sizes, int w, int h) {
         final double ASPECT_TOLERANCE = 0.1;
@@ -289,7 +252,7 @@ public class VideoRecordingActivity extends BaseActivity {
 
     public static File getOutputMediaFile(int type) {
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DCIM), "MiniTikTok");
+                Environment.DIRECTORY_PICTURES), "MiniTikTok");
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 return null;
@@ -298,12 +261,41 @@ public class VideoRecordingActivity extends BaseActivity {
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         File mediaFile;
-        mVideoPath =  mediaStorageDir.getPath() + File.separator + "MiniTikTok_" + timeStamp + ".mp4";
-        if (type == MEDIA_TYPE_VIDEO) {
-            mediaFile = new File(mVideoPath);
+        mPhotoPath =  mediaStorageDir.getPath() + File.separator + "MiniTikTok_" + timeStamp + ".jpg";
+        if (type == MEDIA_TYPE_IMAGE) {
+            mediaFile = new File(mPhotoPath);
         } else {
             return null;
         }
         return mediaFile;
+    }
+
+
+    public int getRotateDegree(String path) {
+        ExifInterface srcExif = null;
+        try {
+            srcExif = new ExifInterface(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        Matrix matrix = new Matrix();
+        int angle = 0;
+        int orientation = srcExif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                angle = DEGREE_90;
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                angle = DEGREE_180;
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                angle = DEGREE_270;
+                break;
+            default:
+                break;
+        }
+        matrix.postRotate(angle);
+        return angle;
     }
 }
