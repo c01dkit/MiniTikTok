@@ -1,31 +1,13 @@
 package com.example.minitiktok.activity;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
-import com.example.minitiktok.R;
-import com.example.minitiktok.api.IMiniDouyinService;
-import com.example.minitiktok.fragment.HomeFragment;
-import com.example.minitiktok.fragment.MessageFragment;
-import com.example.minitiktok.fragment.PlaceFragment;
-import com.example.minitiktok.fragment.ProfileFragment;
-import com.example.minitiktok.fragment.UploadFragment;
-import com.example.minitiktok.model.PostVideoResponse;
-import com.example.minitiktok.util.ResourceUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,6 +22,15 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import com.example.minitiktok.R;
+import com.example.minitiktok.api.IMiniDouyinService;
+import com.example.minitiktok.fragment.HomeFragment;
+import com.example.minitiktok.fragment.MessageFragment;
+import com.example.minitiktok.fragment.PlaceFragment;
+import com.example.minitiktok.fragment.ProfileFragment;
+import com.example.minitiktok.fragment.UploadFragment;
+import com.example.minitiktok.model.PostVideoResponse;
+
 public class MainActivity extends BaseActivity {
     private String mSelectedImagePath;
     private String mSelectedVideoPath;
@@ -47,7 +38,6 @@ public class MainActivity extends BaseActivity {
     private RadioButton mRadioButtonHome;
     private List<Fragment> mFragments = new ArrayList<>();
     private static final String TAG = "MainActivity";
-    private Intent get_intent;
     private String userName = "visitor";
     private String userID = "001";
     private static final int PICK_IMAGE = 1;
@@ -72,7 +62,7 @@ public class MainActivity extends BaseActivity {
     }
     //加载实例到集合中 TODO: 实例化方法应该进行修改
     private void loadFragments(){
-        get_intent = getIntent();
+        Intent get_intent = getIntent();
         userName = get_intent.getStringExtra("user_name");
         userID = get_intent.getStringExtra("user_id");
         mFragments.add(HomeFragment.newInstance("a","0"));

@@ -28,6 +28,7 @@ import com.bumptech.glide.load.engine.cache.LruResourceCache;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +40,6 @@ import com.example.minitiktok.model.GetVideosResponse;
 import com.example.minitiktok.api.IMiniDouyinService;
 import com.example.minitiktok.model.Video;
 import com.example.minitiktok.model.LoopVideo;
-
 import com.example.minitiktok.R;
 
 /**
@@ -112,6 +112,19 @@ public class HomeFragment extends BaseFragment {
         fetchFeed();
         addListener();
         return mView;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        //JZVideoPlayerStandard.goOnPlayOnPause();
+        JZVideoPlayer.releaseAllVideos();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        JZVideoPlayerStandard.goOnPlayOnResume();
     }
 
     private void initView(View view){
@@ -269,7 +282,7 @@ public class HomeFragment extends BaseFragment {
 
         @Override
         public VideoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = View.inflate(parent.getContext(), R.layout.activity_click_video, null);
+            View view = View.inflate(parent.getContext(), R.layout.activity_video, null);
 
             LoopVideo videoPlayer = view.findViewById(R.id.click_pop_video);
             ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) videoPlayer.getLayoutParams();
