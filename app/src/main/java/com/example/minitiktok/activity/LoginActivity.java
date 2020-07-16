@@ -19,7 +19,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        hideExtra();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
             Transition slide = TransitionInflater.from(this).inflateTransition(R.transition.slide);
@@ -31,6 +31,7 @@ public class LoginActivity extends BaseActivity {
         getWindow().setAttributes(layoutParams);
 
         setContentView(R.layout.activity_login);
+        hideExtra();
 //        permissionRequest(1);
         findViewById(R.id.ib_close).setOnClickListener(new View.OnClickListener() {
             @Override

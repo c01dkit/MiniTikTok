@@ -34,4 +34,9 @@
     <string name="photo_path">photo_path</string>
     <string name="zoom">对焦</string>
     <string name="take_photo">拍摄</string>
+
+    <string name="text1">粉丝</string>
+    <string name="text2">赞</string>
+    <string name="text3">\@我的</string>
+    <string name="text4">评论</string>
 </resources>
