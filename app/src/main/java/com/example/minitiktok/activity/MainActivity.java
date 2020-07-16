@@ -80,6 +80,8 @@ public class MainActivity extends BaseActivity {
             Fragment fragment = null;
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int radioID) {
+                mFragments.remove(mFragments.size()-1);
+                mFragments.add(ProfileFragment.newInstance(userName,userID));
                 switch (radioID){
                     case R.id.radio_button_home:{
                         fragment = mFragments.get(0);
