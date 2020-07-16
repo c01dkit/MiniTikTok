@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<com.example.minitiktok.view.IJKPlayerStandardLoopVideo
+    <com.example.minitiktok.model.LoopVideo
         android:id="@+id/click_pop_video"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"/>-->
+        android:layout_alignParentBottom="true"/>
 
     <ImageButton
         android:id="@+id/b_like"

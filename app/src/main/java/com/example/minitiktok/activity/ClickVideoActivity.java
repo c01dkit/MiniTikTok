@@ -2,18 +2,15 @@ package com.example.minitiktok.activity;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,15 +20,13 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
 import com.bumptech.glide.load.engine.cache.LruResourceCache;
 import com.example.minitiktok.model.Video;
-//import com.example.minitiktok.view.JZVideoPlayerStandardLoopVideo;
+import com.example.minitiktok.model.LoopVideo;
 import com.example.minitiktok.R;
 
-//import cn.jzvd.JZVideoPlayerStandard;
-//import static cn.jzvd.JZVideoPlayer.CURRENT_STATE_NORMAL;
+import cn.jzvd.JZVideoPlayerStandard;
+import static cn.jzvd.JZVideoPlayer.CURRENT_STATE_NORMAL;
 
 public class ClickVideoActivity extends AppCompatActivity {
-
-    //private JZVideoPlayerStandardLoopVideo mvideoPlayer;
 
     public static void launch(Activity activity, Video video, View animView){
         Intent i = new Intent(activity, ClickVideoActivity.class);
@@ -49,12 +44,12 @@ public class ClickVideoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_click_video);
-      /*  mvideoPlayer = findViewById(R.id.click_pop_video);
-        String imgurl = getIntent().getStringExtra("image_url");
-        String videourl = getIntent().getStringExtra("video_url");
+        LoopVideo mVideoPlayer = findViewById(R.id.click_pop_video);
+        String imageUrl = getIntent().getStringExtra("image_url");
+        String videoUrl = getIntent().getStringExtra("video_url");
 
-        mvideoPlayer.setUp(videourl,JZVideoPlayerStandard.SCREEN_WINDOW_FULLSCREEN | CURRENT_STATE_NORMAL );
-        mvideoPlayer.startVideo();
+        mVideoPlayer.setUp(videoUrl,JZVideoPlayerStandard.SCREEN_WINDOW_FULLSCREEN | CURRENT_STATE_NORMAL );
+        mVideoPlayer.startVideo();
 
         GlideBuilder builder = new GlideBuilder(this);
         int diskSizeInBytes = 1024 * 1024 * 100;
@@ -62,10 +57,10 @@ public class ClickVideoActivity extends AppCompatActivity {
         builder.setDiskCache(new InternalCacheDiskCacheFactory(this, diskSizeInBytes));
         builder.setMemoryCache(new LruResourceCache(memorySizeInBytes));
         Glide.with(this)
-                .load(imgurl)
+                .load(imageUrl)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(mvideoPlayer.thumbImageView);
-        mvideoPlayer.thumbImageView.setVisibility(View.VISIBLE);*/
+                .into(mVideoPlayer.thumbImageView);
+        mVideoPlayer.thumbImageView.setVisibility(View.VISIBLE);
 
         initBtns();
     }
@@ -87,7 +82,6 @@ public class ClickVideoActivity extends AppCompatActivity {
                 animation.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
-
                     }
 
                     @Override
@@ -100,14 +94,13 @@ public class ClickVideoActivity extends AppCompatActivity {
 
                     @Override
                     public void onAnimationRepeat(Animation animation) {
-
                     }
                 });
                 button.startAnimation(animation);
             }
         });
     }
-/*
+
     // 按home键，回到app后在原位置播放
     @Override
     protected void onResume() {
@@ -122,13 +115,11 @@ public class ClickVideoActivity extends AppCompatActivity {
         JZVideoPlayerStandard.goOnPlayOnPause();
     }
 
-
-
     @Override
     public void onBackPressed() {
         if (JZVideoPlayerStandard.backPress()) {
             return;
         }
         super.onBackPressed();
-    }*/
+    }
 }

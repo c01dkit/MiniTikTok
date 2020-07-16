@@ -9,6 +9,13 @@ public class GetVideosResponse {
     @SerializedName("feeds") public List<Video> videos;
     @SerializedName("error") public String error;
 
+    public List<Video> getVideos() {
+        return videos;
+    }
+    public boolean isSuccess() {
+        return success;
+    }
+
     @Override
     public String toString() {
         return "success=" + success +

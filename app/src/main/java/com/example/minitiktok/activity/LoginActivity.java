@@ -19,7 +19,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
             Transition slide = TransitionInflater.from(this).inflateTransition(R.transition.slide);
             getWindow().setEnterTransition(slide);
@@ -27,7 +27,7 @@ public class LoginActivity extends BaseActivity {
 
         WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
         layoutParams.alpha = 0.98f;
-        getWindow().setAttributes(layoutParams);*/
+        getWindow().setAttributes(layoutParams);
 
         setContentView(R.layout.activity_login);
         permissionRequest(1);
@@ -51,7 +51,6 @@ public class LoginActivity extends BaseActivity {
                 Intent i = new Intent(getBaseContext(),MainActivity.class);
                 i.putExtra("user_name", userName);
                 i.putExtra("user_id", userID);
-//                setResult(RESULT_OK, i);
                 startActivity(i);
                 finish();
             }
