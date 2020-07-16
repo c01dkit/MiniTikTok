@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#7f7fff">
+    android:background="#447fff">
 
     <ImageButton
         android:id="@+id/ib_close"
@@ -24,7 +24,7 @@
         android:textColor="@android:color/background_light"
         android:padding="8dp"
         android:hint="@string/username"
-        android:background="#8f8fff"
+        android:background="#448fff"
         android:layout_margin="32dp"
         app:layout_constraintBottom_toTopOf="@id/fab_submit"
         app:layout_constraintTop_toTopOf="parent" />
