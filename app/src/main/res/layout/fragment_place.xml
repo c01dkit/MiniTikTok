@@ -17,14 +17,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:layout_marginLeft="180dp"
+            android:layout_marginLeft="160dp"
             android:textSize="20dp"
             android:text="@string/place_tab"
             android:textColor="@color/light_background"/>
 
     </FrameLayout>
 
-    <RelativeLayout
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp">
@@ -57,6 +57,21 @@
             android:layout_marginTop="290dp"
             android:layout_toEndOf="@+id/imageView3"/>
 
-    </RelativeLayout>
+    </RelativeLayout>-->
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_place"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/place_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </FrameLayout>

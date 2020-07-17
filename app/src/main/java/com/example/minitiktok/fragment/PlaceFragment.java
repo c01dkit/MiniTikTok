@@ -1,14 +1,22 @@
 package com.example.minitiktok.fragment;
 
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.minitiktok.R;
+import com.example.minitiktok.recycler.MyAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,28 +25,23 @@ import com.example.minitiktok.R;
  */
 public class PlaceFragment extends BaseFragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
+    private static final String TAG = "PlaceFragment";
     private String mParam1;
     private String mParam2;
 
+    private List<Image> mVideos = new ArrayList<>();
+    private RecyclerView mRecyclerView;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private int mFullWidth;
+    private static final String url = "https://uploadbeta.com/api/pictures/random/";
+    private MyAdapter mAdapter;
+
     public PlaceFragment() {
-        // Required empty public constructor
+        super();
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PlaceFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static PlaceFragment newInstance(String param1, String param2) {
         PlaceFragment fragment = new PlaceFragment();
         Bundle args = new Bundle();
@@ -60,7 +63,21 @@ public class PlaceFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_place, container, false);
+        mFullWidth = this.getResources().getDisplayMetrics().widthPixels;
+        final View mView = inflater.inflate(R.layout.fragment_place, container, false);
+        mRecyclerView = mView.findViewById(R.id.place_recycler);
+        /* 设定瀑布流layout */
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+
+        return mView;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+        mSwipeRefreshLayout.setOnRefreshListener(() -> {
+        });
+    }
+
 }
