@@ -1,39 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.example.minitiktok.model.LoopVideo
         android:id="@+id/click_pop_video"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true" />
 
     <ImageButton
         android:id="@+id/b_like"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_alignParentTop="true"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="40dp"
-        android:scaleType="centerInside"
         android:alpha="0.65"
         android:background="#0000"
-        android:layout_alignParentTop="true"
+        android:scaleType="centerInside"
         android:src="@drawable/ic_like"
         app:layout_constraintBottom_toTopOf="@id/ib_comment"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/iv_like"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_alignParentTop="true"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="40dp"
-        android:layout_alignParentTop="true"
         android:src="@drawable/ic_heart"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/ib_comment"
@@ -44,51 +45,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:layout_marginEnd="30dp"
-        android:text="0"
+        android:text="12.3w"
         android:textColor="@color/light_background"
-        app:layout_constraintTop_toBottomOf="@+id/iv_like"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintEnd_toEndOf="@+id/iv_like"
+        app:layout_constraintStart_toStartOf="@+id/iv_like"
+        app:layout_constraintTop_toBottomOf="@+id/iv_like" />
 
     <ImageButton
         android:id="@+id/ib_comment"
-        android:layout_below="@id/b_like"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_below="@id/b_like"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
-        android:background="#0000"
-        android:src="@drawable/ic_comment"
-        android:scaleType="centerInside"
         android:alpha="0.65"
+        android:background="#0000"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_comment"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/comment_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:layout_marginEnd="20dp"
         android:text="128"
         android:textColor="@color/light_background"
-        app:layout_constraintTop_toBottomOf="@+id/ib_comment"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintEnd_toEndOf="@+id/ib_comment"
+        app:layout_constraintStart_toStartOf="@+id/ib_comment"
+        app:layout_constraintTop_toBottomOf="@+id/ib_comment" />
 
     <ImageButton
         android:id="@+id/ib_share"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/ib_comment"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
-        android:background="#0000"
-        android:layout_below="@id/ib_comment"
         android:alpha="0.65"
-        app:layout_constraintTop_toBottomOf="@id/ib_comment"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_share"
+        android:background="#0000"
         android:scaleType="centerInside"
-        android:layout_width="48dp"
-        android:layout_height="48dp" />
+        android:src="@drawable/ic_share"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ib_comment" />
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/userImage"
@@ -97,9 +98,9 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         android:src="@drawable/head"
-        app:layout_constraintTop_toBottomOf="@+id/ib_share"
         app:layout_constraintRight_toRightOf="parent"
-        app:riv_oval="true"/>
+        app:layout_constraintTop_toBottomOf="@+id/ib_share"
+        app:riv_oval="true" />
 
     <TextView
         android:id="@+id/userName"
@@ -109,7 +110,7 @@
         android:layout_marginEnd="10dp"
         android:text="\@贾玲"
         android:textColor="@color/light_background"
-        app:layout_constraintTop_toBottomOf="@+id/userImage"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

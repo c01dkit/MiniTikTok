@@ -55,7 +55,6 @@ public class LoginActivity extends BaseActivity {
                     Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                     setResult(RESULT_OK,i);
                 }
-                setResult(RESULT_OK,i);
                 finish();
             }
         });
